@@ -29,5 +29,5 @@ public class PerformUser {
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER => permet de charger directement les roles à l'inverse de LAZY qui est par défaut
-	private Collection<PerformRole> roles = new ArrayList<>();
+	private Collection<PerformRole> PerformRoles = new ArrayList<>();
 }

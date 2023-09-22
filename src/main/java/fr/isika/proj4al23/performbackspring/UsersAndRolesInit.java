@@ -20,32 +20,30 @@ public class UsersAndRolesInit implements ApplicationRunner{
 	
 //		PerformRole roleUser = new PerformRole();
 //		roleUser.setRoleName("USER");
+//		accountService.addNewRole(roleUser);
 //		
 //		PerformRole roleAdmin = new PerformRole();
-//		roleUser.setRoleName("ADMIN");
+//		roleAdmin.setRoleName("ADMIN");		
+//		accountService.addNewRole(roleAdmin);
 //		
 //		PerformUser user1 = new PerformUser();
 //		user1.setEmail("user1@example.com");
 //		user1.setUsername("user1");
 //		user1.setPassword("1234");
+//		accountService.addNewUser(user1);
 //		
 //		PerformUser user2 = new PerformUser();
 //		user2.setEmail("user2@example.com");
 //		user2.setUsername("user2");
 //		user2.setPassword("5678");
+//		accountService.addNewUser(user2);
 //		
 //		PerformUser user3 = new PerformUser();
 //		user3.setEmail("user3@example.com");
 //		user3.setUsername("user3");
 //		user3.setPassword("9012");
-//		
-//		accountService.addNewRole(roleUser);
-//		accountService.addNewRole(roleAdmin);
-//			
-//		accountService.addNewUser(user1);
-//		accountService.addNewUser(user2);
 //		accountService.addNewUser(user3);
-//			
+//					
 //		accountService.addRoleToUser("user1", "USER");
 //		accountService.addRoleToUser("user1", "ADMIN");
 //			
