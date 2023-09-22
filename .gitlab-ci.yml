@@ -6,6 +6,9 @@ maven-build:
     stage: build
     image: maven:latest
     script:
+        - export DATABASE_URI=$DATABASE_URI
+        - export DBUSER=$DBUSER
+        - export DBPASSWORD=$DBPASSWORD
         - mvn clean compile
         - mvn package -DskipTests=true
     artifacts:
