@@ -25,13 +25,13 @@ docker-build:
         - docker logout
         
 deploy-prod:
-	stage: deploy
-	image: docker:latest
-	services:
-		- docker:dind
-	script:
-		- docker -H $SPRING_CLUSTER container stop $(docker container ls -q)
-		- docker -H $SPRING_CLUSTER container rm $(docker container ls-aq)
-		- docker -H $SPRING_CLUSTER image rmi $(docker image ls-aq)
-		- docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-		- docker -H $SPRING_CLUSTER run --network dbconnection -p $PHOST:$PGUEST -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
+    stage: deploy
+    image: docker:latest
+    services:
+        - docker:dind
+    script:
+        - docker -H $SPRING_CLUSTER container stop $(docker container ls -q)
+        - docker -H $SPRING_CLUSTER container rm $(docker container ls-aq)
+        - docker -H $SPRING_CLUSTER image rmi $(docker image ls-aq)
+        - docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
+        - docker -H $SPRING_CLUSTER run --network dbconnection -p $PHOST:$PGUEST -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
