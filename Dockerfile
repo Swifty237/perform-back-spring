@@ -1,6 +1,11 @@
 FROM openjdk:11-jre-slim
 
-EXPOSE 3002 
+EXPOSE 3002
+
+ENV DATABASE_URI ""
+ENV DBNAME ""
+ENV DBUSER ""
+ENV DBPASSWORD ""
 
 RUN mkdir -p /usr/local/app
 
