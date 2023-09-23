@@ -7,7 +7,7 @@ maven-build:
     image: maven:latest
     script:
         - mvn clean compile
-        - mvn -DDATABASE_URI=$DATABASE_URI -DDBUSER=$DBUSER -DDBPASSWORD=$DDBPASSWORD package -B -DskipTests=true
+        - mvn -DDATABASE_URI=$DATABASE_URI -DDBUSER=$DBUSER -DDBPASSWORD=$DDBPASSWORD -DDBNAME=$DBNAME package -B -DskipTests=true
     artifacts:
         paths:
             - target/*.jar
