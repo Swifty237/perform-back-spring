@@ -2,7 +2,7 @@ services:
 
   back-spring:
     image: yannick237/pm_spring
-    networks: dbconnection
+    network: dbconnection
     ports:
       - "80:3002"
     environment:
