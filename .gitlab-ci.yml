@@ -34,6 +34,6 @@ aws-spring:
         - if docker -H $SPRING_CLUSTER ps -a --format '{{.Names}}' | grep -q $DOCKERHUB_USERNAME; then docker -H $SPRING_CLUSTER container rm $DOCKERHUB_USERNAME; fi
         - if docker -H $SPRING_CLUSTER images $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE &>/dev/null; then docker -H $SPRING_CLUSTER rmi "$DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE"; fi
         - docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-        - docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME --network dbconnection -p $PHOST:$PGUEST -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
+        - docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME --network dbconnection -p $PHOST:$PGUEST -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD="$DBPASSWORD" -e DBNAME=$DBNAME -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
     rules:
         - when: manual
