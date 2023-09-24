@@ -11,3 +11,6 @@ services:
       DBPASWORD: "Pokerface2371984"
       DATABASE_URI: "performawsrds.cub35eckpmbo.eu-west-3.rds.amazonaws.com"
       DBNAME: "performdb"
+      
+networks:
+  dbconnection:
