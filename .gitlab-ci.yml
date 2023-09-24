@@ -30,6 +30,12 @@ aws-prod:
     services:
         - docker:dind
     script:
+        - export $PGUEST=$PGUEST
+        - export $PHOST=$PHOST
+        - export DATABASE_URI=$DATABASE_URI
+        - export DBUSER=$DBUSER
+        - export DBPASSWORD=$DBPASSWORD
+        - export DBNAME=$DBNAME
         - if ["$(docker -H $SPRING_CLUSTER ps)"]; then docker -H $SPRING_CLUSTER stop $(docker ps -q); fi
         - if ["$(docker -H $SPRING_CLUSTER ps -a)"]; then docker -H $SPRING_CLUSTER container prune -f; fi
         - if ["$(docker -H $SPRING_CLUSTER images)"]; then docker -H $SPRING_CLUSTER image prune -a -f; fi
