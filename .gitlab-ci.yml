@@ -33,6 +33,6 @@ aws-prod:
         - if ["$(docker -H $SPRING_CLUSTER ps)"]; then docker -H $SPRING_CLUSTER stop $(docker ps -q); fi
         - if ["$(docker -H $SPRING_CLUSTER ps -a)"]; then docker -H $SPRING_CLUSTER container prune -f; fi
         - if ["$(docker -H $SPRING_CLUSTER images)"]; then docker -H $SPRING_CLUSTER image prune -a -f; fi
-        - docker -H $SPRING_CLUSTER compose up
+        - docker -H $SPRING_CLUSTER compose up -d
     #rules:
     #    - when: manual
