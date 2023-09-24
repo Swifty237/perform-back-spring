@@ -34,6 +34,6 @@ aws-spring:
         - if ["$(docker -H $SPRING_CLUSTER ps -a)"]; then docker -H $SPRING_CLUSTER container prune -f; fi
         - if ["$(docker -H $SPRING_CLUSTER images)"]; then docker -H $SPRING_CLUSTER image prune -a -f; fi
         - docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-        - docker -H $SPRING_CLUSTER compose up -d
+        - docker run --network dbconnection -p 80:3002 -e DATABASE_URI=performawsrds.cub35eckpmbo.eu-west-3.rds.amazonaws.com -e DBUSER=admin -e DBPASSWORD=Pokerface2371984 -e DBNAME=performdb -d yannick237/pm_spring
     #rules:
     #    - when: manual
