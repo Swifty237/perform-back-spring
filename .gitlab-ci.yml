@@ -40,6 +40,7 @@ aws-spring:
         - echo $DBNAME
         - echo $PHOST
         - echo $PGUEST
-        - docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME --network dbconnection -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -p $PHOST:$PGUEST -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
+        - docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME run --network dbconnection -p 80:3002 -e DATABASE_URI=performawsrds.cub35eckpmbo.eu-west-3.rds.amazonaws.com -e DBUSER=admin -e DBPASSWORD=Pokerface2371984 -e DBNAME=performdb -d yannick237/pm_spring
+        #- docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME --network dbconnection -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -p $PHOST:$PGUEST -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
     #rules:
         #- when: manual
