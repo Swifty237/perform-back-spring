@@ -30,9 +30,15 @@ aws-prod:
     services:
         - docker:dind
     script:
-        - if ["$(docker -H $SPRING_CLUSTER ps)"]; then docker -H $SPRING_CLUSTER stop $(docker ps -q); else echo "No container up"; fi
-        - if ["$(docker -H $SPRING_CLUSTER ps -a)"]; then docker -H $SPRING_CLUSTER container prune -f; else echo "No container down"; fi
-        - if ["$(docker -H $SPRING_CLUSTER images)"]; then docker -H $SPRING_CLUSTER image prune -a -f; else echo "No image"; fi
+        - if [$(docker -H $SPRING_CLUSTER ps)]; then export $IS_EMPTY=true; else export $IS_EMPTY=false; fi
+        - echo $IS_EMPTY
+        - if [$IS_EMPTY]; then docker -H $SPRING_CLUSTER stop $(docker ps -q); else echo "No container up"; fi
+        - if ["$(docker -H $SPRING_CLUSTER ps -a)]; then export $IS_EMPTY=true; else export $IS_EMPTY=false; fi
+        - echo $IS_EMPTY
+        - if [$IS_EMPTY]; then docker -H $SPRING_CLUSTER container prune -f; else echo "No container down"; fi
+        - if ["$(docker -H $SPRING_CLUSTER images)"]; then export $IS_EMPTY=true; else export $IS_EMPTY=false; fi
+        - echo $IS_EMPTY
+        - if [$IS_EMPTY]; then docker -H $SPRING_CLUSTER image prune -a -f; else echo "No image"; fi
         - docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
         - docker -H $SPRING_CLUSTER run --network dbconnection -p $PHOST:$PGUEST -e DATABASE_URI=$DATABASE_URI -e DBUSER=$DBUSER -e DBPASSWORD=$DBPASSWORD -e DBNAME=$DBNAME -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
     rules:
