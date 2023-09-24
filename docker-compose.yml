@@ -1,0 +1,12 @@
+services:
+
+  back-spring:
+    image: yannick237/pm_spring
+    network: dbconnect
+    ports:
+      - "80:3002"
+    environment:
+      BDUSER: "admin"
+      DBPASWORD: "Pokerface2371984"
+      DATABASE_URI: "performawsrds.cub35eckpmbo.eu-west-3.rds.amazonaws.com"
+      DBNAME: "performdb"
