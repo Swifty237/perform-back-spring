@@ -30,7 +30,7 @@ aws-prod:
     services:
         - docker:dind
     script:
-        - docker -H $SPRING_CLUSTER stop $(docker ps -q) &>/dev/null
+        - docker -H $SPRING_CLUSTER stop $(docker -H $SPRING_CLUSTER ps -q) &>/dev/null
         #- if ["$(docker -H $SPRING_CLUSTER ps)"]; then docker -H $SPRING_CLUSTER stop $(docker ps -q) else echo "No container up" fi
         - docker -H $SPRING_CLUSTER container prune -f &>/dev/null
         #- if ["$(docker -H $SPRING_CLUSTER ps -a)"]; then docker -H $SPRING_CLUSTER container prune -f else echo "No container down" fi
