@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +29,8 @@ public class PerformUser {
 	
 	private String email;
 	private String username;
+	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER => permet de charger directement les roles à l'inverse de LAZY qui est par défaut
