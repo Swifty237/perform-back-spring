@@ -6,6 +6,7 @@ ENV DBURI ""
 ENV DBNAME ""
 ENV DBUSER ""
 ENV DBPASS ""
+ENV DBPORT ""
 
 RUN mkdir -p /usr/local/app
 
