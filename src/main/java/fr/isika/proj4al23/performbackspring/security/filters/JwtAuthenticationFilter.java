@@ -1,4 +1,4 @@
-package fr.isika.proj4al23.performbackspring.security;
+package fr.isika.proj4al23.performbackspring.security.filters;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,6 +22,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.isika.proj4al23.performbackspring.utils.JwtUtil;
+
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	private AuthenticationManager authenticationManager;
@@ -31,7 +33,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+	public Authentication attemptAuthentication(
+			HttpServletRequest request, 
+			HttpServletResponse response) throws AuthenticationException {
 		
 		System.out.println("attemptAuthentication");
 		
@@ -47,23 +51,27 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	}
 	
 	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+	protected void successfulAuthentication(
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			FilterChain chain, 
+			Authentication authResult) throws IOException, ServletException {
 		
 		System.out.println("successfullAuthentication");
 		
 		User user = (User) authResult.getPrincipal();
-		Algorithm algorithm = Algorithm.HMAC256("password78");
+		Algorithm algorithm = Algorithm.HMAC256(JwtUtil.SECRET);
 		
 		String jwtAccessToken = JWT.create()
 				.withSubject(user.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
+				.withExpiresAt(new Date(System.currentTimeMillis() + JwtUtil.EXPIRE_ACCESS))
 				.withIssuer(request.getRequestURL().toString())
-				.withClaim("roles", user.getAuthorities().stream().map(gAuth -> gAuth .getAuthority()).collect(Collectors.toList()))
+				.withClaim("roles", user.getAuthorities().stream().map(gAuth -> gAuth.getAuthority()).collect(Collectors.toList()))
 				.sign(algorithm);
 		
 		String jwtRefreshToken = JWT.create()
 				.withSubject(user.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+				.withExpiresAt(new Date(System.currentTimeMillis() + JwtUtil.EXPIRE_REFRESH))
 				.withIssuer(request.getRequestURL().toString())
 				.sign(algorithm);
 		
