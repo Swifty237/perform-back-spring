@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true) // => pour pouvoir utiliser les annotations
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true) // => pour pouvoir utiliser les annotations pour les methodes à securiser
 public class PerformBackSpringApplication  {
 	
 	public static void main(String[] args) {
