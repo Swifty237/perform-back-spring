@@ -1,5 +1,7 @@
 package fr.isika.proj4al23.performbackspring.security;
 
+import java.util.List;
+
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +24,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
@@ -48,6 +50,7 @@ public class SecurityConfig {
 		return httpSecurity
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.csrf(csrf -> csrf.disable())
+				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(ar -> ar.antMatchers("/auth/login/**").permitAll())
 				.authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
 				.oauth2ResourceServer(oa -> oa.jwt(Customizer.withDefaults()))
@@ -77,9 +80,11 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		
-		corsConfiguration.addAllowedOrigin("*");
+		corsConfiguration.addAllowedOrigin("http://localhost:4200");
 		corsConfiguration.addAllowedMethod("*");
 		corsConfiguration.addAllowedHeader("*");
+		corsConfiguration.setAllowCredentials(true);
+//		corsConfiguration.setExposedHeaders(List.of("x-auth-token"));
 		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfiguration);
