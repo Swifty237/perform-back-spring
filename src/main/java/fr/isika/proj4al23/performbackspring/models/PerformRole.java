@@ -1,5 +1,6 @@
 package fr.isika.proj4al23.performbackspring.models;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -1,10 +1,10 @@
 package fr.isika.proj4al23.performbackspring;
 
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import fr.isika.proj4al23.performbackspring.models.PerformRole;
@@ -14,11 +14,18 @@ import fr.isika.proj4al23.performbackspring.service.AccountService;
 @Component
 public class UsersAndRolesInit implements ApplicationRunner{
 
-	@Autowired
+//	@Autowired
 	public AccountService accountService;
-	
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		
+//		String texte = "Bonjour, ceci est une chaîne de caractères.";
+//
+//        // Encoder en base64
+//        String chaineBase64 = Base64.getEncoder().encodeToString(texte.getBytes());
+//
+//        System.out.println(chaineBase64);
 	
 //		PerformRole roleUser = new PerformRole();
 //		roleUser.setRoleName("USER");

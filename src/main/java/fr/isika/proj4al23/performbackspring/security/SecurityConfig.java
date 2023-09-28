@@ -1,49 +1,98 @@
 package fr.isika.proj4al23.performbackspring.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-import fr.isika.proj4al23.performbackspring.security.filters.JwtAuthenticationFilter;
-import fr.isika.proj4al23.performbackspring.security.filters.JwtAuthorizationFilter;
+import com.nimbusds.jose.jwk.source.ImmutableSecret;
+
 import fr.isika.proj4al23.performbackspring.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity(prePostEnabled = true) // => permet de sécuriser les routes avec des annotations
+public class SecurityConfig {
 	
-	@Autowired
-	private UserDetailsServiceImpl userDetailsService;
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService);
+	@Value("${jwt.secret}")
+	private String secretKey;
+			
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // les cookies de session ne sont plus enregistré
-		http.authorizeRequests().antMatchers("/refreshtoken/**", "/login/**").permitAll();
-		http.authorizeRequests().anyRequest().authenticated();
-//		http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority("SUPER ADMIN");
-//		http.authorizeRequests().antMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority("ADMIN");
-//		http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("USER");
-		http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));
-		http.addFilterBefore(new JwtAuthorizationFilter(),  UsernamePasswordAuthenticationFilter.class);
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		
+		return httpSecurity
+				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(ar -> ar.antMatchers("/auth/login/**").permitAll())
+				.authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
+				.oauth2ResourceServer(oa -> oa.jwt(Customizer.withDefaults()))
+				.build();
 	}
 	
 	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		// TODO Auto-generated method stub
-		return super.authenticationManagerBean();
+	JwtEncoder jwtEncoder() {
+		return new NimbusJwtEncoder(new ImmutableSecret<>(secretKey.getBytes()));
+	}
+	
+	@Bean
+	JwtDecoder jwtDecoder() {
+		SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), "RSA");
+		return NimbusJwtDecoder.withSecretKey(secretKeySpec).macAlgorithm(MacAlgorithm.HS256).build();
+	}
+	
+	@Bean
+	public AuthenticationManager authenticationManager(UserDetailsServiceImpl userDetailsService) {
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+		return new ProviderManager(daoAuthenticationProvider);
+	}
+	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration corsConfiguration = new CorsConfiguration();
+		
+		corsConfiguration.addAllowedOrigin("*");
+		corsConfiguration.addAllowedMethod("*");
+		corsConfiguration.addAllowedHeader("*");
+		
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfiguration);
+		
+		return source;
 	}
 }
+
+
+
+
+
+
+
+
+
