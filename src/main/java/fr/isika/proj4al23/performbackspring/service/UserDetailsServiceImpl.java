@@ -18,7 +18,7 @@ import fr.isika.proj4al23.performbackspring.models.PerformUser;
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	private AccountService accountService;
+	private UserAccountService accountService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

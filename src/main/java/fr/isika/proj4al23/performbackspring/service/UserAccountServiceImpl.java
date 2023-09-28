@@ -13,7 +13,7 @@ import fr.isika.proj4al23.performbackspring.repository.PerformUserRepository;
 
 @Service
 @Transactional
-public class AccountServiceImpl implements AccountService {
+public class UserAccountServiceImpl implements UserAccountService {
 	
 	private PerformUserRepository performUserRepository;
 	
@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	private PasswordEncoder passwordEnconder;
 
-	public AccountServiceImpl(
+	public UserAccountServiceImpl(
 			PerformUserRepository performUserRepository, 
 			PerformRoleRepository performRoleRepository,
 			PasswordEncoder passwordEnconder) {
