@@ -12,4 +12,5 @@ public interface UserAccountService {
 	void addRoleToUser(String username, String roleName);
 	PerformUser loadUserByUsername(String username);
 	List<PerformUser> listUsers();
+	List<PerformRole> listRoles();
 }

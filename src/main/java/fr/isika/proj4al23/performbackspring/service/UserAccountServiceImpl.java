@@ -2,6 +2,7 @@ package fr.isika.proj4al23.performbackspring.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,22 +16,14 @@ import fr.isika.proj4al23.performbackspring.repository.PerformUserRepository;
 @Transactional
 public class UserAccountServiceImpl implements UserAccountService {
 	
+	@Autowired
 	private PerformUserRepository performUserRepository;
 	
+	@Autowired
 	private PerformRoleRepository performRoleRepository;
 	
+	@Autowired
 	private PasswordEncoder passwordEnconder;
-
-	public UserAccountServiceImpl(
-			PerformUserRepository performUserRepository, 
-			PerformRoleRepository performRoleRepository,
-			PasswordEncoder passwordEnconder) {
-		
-		super();
-		this.performUserRepository = performUserRepository;
-		this.performRoleRepository = performRoleRepository;
-		this.passwordEnconder = passwordEnconder;
-	}
 
 	@Override
 	public PerformUser addNewUser(PerformUser performUser) {
@@ -59,6 +52,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public List<PerformUser> listUsers() {
 		return performUserRepository.findAll();
+	}
+
+	@Override
+	public List<PerformRole> listRoles() {
+		return performRoleRepository.findAll();
 	}
 
 }
