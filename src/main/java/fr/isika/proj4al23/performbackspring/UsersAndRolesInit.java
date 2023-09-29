@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 
 import fr.isika.proj4al23.performbackspring.models.PerformRole;
 import fr.isika.proj4al23.performbackspring.models.PerformUser;
-import fr.isika.proj4al23.performbackspring.service.UserAccountService;
+import fr.isika.proj4al23.performbackspring.service.UserAccountServiceImpl;
 
 @Component
 public class UsersAndRolesInit implements ApplicationRunner{
 
 	@Autowired
-	public UserAccountService accountService;
+	public UserAccountServiceImpl userAccountService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -27,48 +27,48 @@ public class UsersAndRolesInit implements ApplicationRunner{
 	
 //		PerformRole roleUser = new PerformRole();
 //		roleUser.setRoleName("USER");
-//		accountService.addNewRole(roleUser);
+//		userAccountService.addNewRole(roleUser);
 //		
 //		PerformRole roleAdmin = new PerformRole();
 //		roleAdmin.setRoleName("ADMIN");		
-//		accountService.addNewRole(roleAdmin);
+//		userAccountService.addNewRole(roleAdmin);
 //		
 //		PerformRole roleMod = new PerformRole();
 //		roleMod.setRoleName("MOD");		
-//		accountService.addNewRole(roleMod);
+//		userAccountService.addNewRole(roleMod);
 //		
 //		PerformUser user1 = new PerformUser();
 //		user1.setEmail("user1@example.com");
 //		user1.setUsername("user1");
 //		user1.setPassword("11111");
-//		accountService.addNewUser(user1);
+//		userAccountService.addNewUser(user1);
 //		
 //		PerformUser user2 = new PerformUser();
 //		user2.setEmail("user2@example.com");
 //		user2.setUsername("user2");
 //		user2.setPassword("22222");
-//		accountService.addNewUser(user2);
+//		userAccountService.addNewUser(user2);
 //		
 //		PerformUser mod = new PerformUser();
 //		mod.setEmail("mod@example.com");
 //		mod.setUsername("mod");
 //		mod.setPassword("mod");
-//		accountService.addNewUser(mod);
+//		userAccountService.addNewUser(mod);
 //		
 //		PerformUser admin = new PerformUser();
 //		admin.setEmail("admin@example.com");
 //		admin.setUsername("admin");
 //		admin.setPassword("admin");
-//		accountService.addNewUser(admin);
+//		userAccountService.addNewUser(admin);
 //					
-//		accountService.addRoleToUser("user1", "USER");			
-//		accountService.addRoleToUser("user2", "USER");
+//		userAccountService.addRoleToUser("user1", "USER");			
+//		userAccountService.addRoleToUser("user2", "USER");
 //		
-//		accountService.addRoleToUser("mod", "USER");
-//		accountService.addRoleToUser("mod", "MOD");
+//		userAccountService.addRoleToUser("mod", "USER");
+//		userAccountService.addRoleToUser("mod", "MOD");
 //		
-//		accountService.addRoleToUser("admin", "USER");
-//		accountService.addRoleToUser("admin", "MOD");
-//		accountService.addRoleToUser("admin", "ADMIN");
+//		userAccountService.addRoleToUser("admin", "USER");
+//		userAccountService.addRoleToUser("admin", "MOD");
+//		userAccountService.addRoleToUser("admin", "ADMIN");
 	}
 }
