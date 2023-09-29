@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.isika.proj4al23.performbackspring.models.PerformRole;
 import fr.isika.proj4al23.performbackspring.models.PerformUser;
-import fr.isika.proj4al23.performbackspring.service.UserAccountService;
+import fr.isika.proj4al23.performbackspring.service.UserAccountServiceImpl;
 import fr.isika.proj4al23.performbackspring.viewmodels.RoleToUserViewModel;
 
 @RestController
@@ -20,24 +20,29 @@ import fr.isika.proj4al23.performbackspring.viewmodels.RoleToUserViewModel;
 public class UserAccountController {
 
 	@Autowired
-	private UserAccountService accountService;
+	private UserAccountServiceImpl userAccountService;
 	
 	@GetMapping(path = "/users")
 	@PostAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
 	public List<PerformUser> performUsers(){
-		return accountService.listUsers();
+		return userAccountService.listUsers();
 	}
 	
 	
 	@PostMapping(path = "/role")
 	@PostAuthorize("hasAuthority('ADMIN')")
 	public PerformRole savePerformRole(@RequestBody PerformRole performRole) {
-		return accountService.addNewRole(performRole);
+		return userAccountService.addNewRole(performRole);
+	}
+	
+	@GetMapping(path = "/roles")
+	@PostAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
+	public List<PerformRole> performRoles(){
+		return userAccountService.listRoles();
 	}
 	
 	@PostMapping(path = "/addroletouser")
-	@PostAuthorize("hasAuthority('ADMIN')")
 	public void addRoleToUser(@RequestBody RoleToUserViewModel roleToUserViewModel) {
-		accountService.addRoleToUser(roleToUserViewModel.getUsername(), roleToUserViewModel.getRoleName());
+		userAccountService.addRoleToUser(roleToUserViewModel.getUsername(), roleToUserViewModel.getRoleName());
 	}
 }
