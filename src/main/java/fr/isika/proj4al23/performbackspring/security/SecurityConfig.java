@@ -1,7 +1,5 @@
 package fr.isika.proj4al23.performbackspring.security;
 
-import java.util.List;
-
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +49,7 @@ public class SecurityConfig {
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.csrf(csrf -> csrf.disable())
 				.cors(Customizer.withDefaults())
-				.authorizeHttpRequests(ar -> ar.antMatchers("/auth/login/**").permitAll())
+				.authorizeHttpRequests(ar -> ar.antMatchers("/auth/**").permitAll())
 				.authorizeHttpRequests(ar -> ar.anyRequest().authenticated())
 				.oauth2ResourceServer(oa -> oa.jwt(Customizer.withDefaults()))
 				.build();
