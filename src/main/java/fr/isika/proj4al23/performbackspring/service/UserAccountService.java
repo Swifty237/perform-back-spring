@@ -13,4 +13,7 @@ public interface UserAccountService {
 	PerformUser loadUserByUsername(String username);
 	List<PerformUser> listUsers();
 	List<PerformRole> listRoles();
+	Boolean isExistsByUsername(String username);
+	Boolean isExistsByEmail(String email);
+	Boolean isExistsByRoleName(String roleName);
 }

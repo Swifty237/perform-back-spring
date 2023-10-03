@@ -2,6 +2,7 @@ package fr.isika.proj4al23.performbackspring.controller;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.isika.proj4al23.performbackspring.models.PerformUser;
 import fr.isika.proj4al23.performbackspring.service.UserAccountServiceImpl;
+import fr.isika.proj4al23.performbackspring.service.UserDetailsServiceImpl;
 
 @RestController
 @RequestMapping("/auth")
@@ -42,6 +45,7 @@ public class AuthLoginController {
 
 	@PostMapping("/login")
 	public Map<String, String> login(String username, String password) {
+
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
@@ -62,14 +66,25 @@ public class AuthLoginController {
 
 	@PostMapping("/register")
 	public Map<String, String> register(String email, String username, String password) {
-		PerformUser performUser = new PerformUser();
-		performUser.setEmail(email);
-		performUser.setUsername(username);
-		performUser.setPassword(password);
 
-		userAccountService.addNewUser(performUser);
-		userAccountService.addRoleToUser(username, "USER");
+		if (userAccountService.isExistsByUsername(username)) {
 
-		return login(username, password);
+			return Map.of("user-exist", "Le nom d'utilisateur est déjà pris.");
+
+		} else if (userAccountService.isExistsByEmail(email)) {
+
+			return Map.of("email-exist", "L'adresse e-mail est déjà utilisée.");
+
+		} else {
+
+			PerformUser performUser = new PerformUser();
+			performUser.setEmail(email);
+			performUser.setUsername(username);
+			performUser.setPassword(password);
+
+			userAccountService.addNewUser(performUser);
+			userAccountService.addRoleToUser(username, "USER");
+			return login(username, password);
+		}
 	}
 }

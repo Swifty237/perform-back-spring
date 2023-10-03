@@ -59,4 +59,19 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return performRoleRepository.findAll();
 	}
 
+	@Override
+	public Boolean isExistsByUsername(String username) {
+		return performUserRepository.existsByUsername(username);
+	}
+
+	@Override
+	public Boolean isExistsByEmail(String email) {
+		return performUserRepository.existsByEmail(email);
+	}
+
+	@Override
+	public Boolean isExistsByRoleName(String roleName) {
+		return performRoleRepository.existsByRoleName(roleName);
+	}
+
 }

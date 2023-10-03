@@ -23,25 +23,26 @@ public class UserAccountController {
 	private UserAccountServiceImpl userAccountService;
 	
 	@GetMapping(path = "/users")
-	@PostAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
+	@PostAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MOD')")
 	public List<PerformUser> performUsers(){
 		return userAccountService.listUsers();
 	}
 	
 	
 	@PostMapping(path = "/role")
-	@PostAuthorize("hasAuthority('ADMIN')")
+	@PostAuthorize("hasAuthority('SCOPE_ADMIN')")
 	public PerformRole savePerformRole(@RequestBody PerformRole performRole) {
 		return userAccountService.addNewRole(performRole);
 	}
 	
 	@GetMapping(path = "/roles")
-	@PostAuthorize("hasAnyAuthority('ADMIN', 'MOD')")
+	@PostAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MOD')")
 	public List<PerformRole> performRoles(){
 		return userAccountService.listRoles();
 	}
 	
 	@PostMapping(path = "/addroletouser")
+	@PostAuthorize("hasAuthority('SCOPE_ADMIN')")
 	public void addRoleToUser(@RequestBody RoleToUserViewModel roleToUserViewModel) {
 		userAccountService.addRoleToUser(roleToUserViewModel.getUsername(), roleToUserViewModel.getRoleName());
 	}

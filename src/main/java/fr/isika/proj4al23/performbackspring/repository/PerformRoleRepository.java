@@ -7,4 +7,5 @@ import fr.isika.proj4al23.performbackspring.models.PerformRole;
 public interface PerformRoleRepository extends JpaRepository<PerformRole, Long> {
 
 	PerformRole findByRoleName(String roleName);
+	Boolean existsByRoleName(String roleName);
 }
