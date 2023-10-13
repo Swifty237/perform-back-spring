@@ -23,12 +23,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 	private PerformRoleRepository performRoleRepository;
 	
 	@Autowired
-	private PasswordEncoder passwordEnconder;
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public PerformUser addNewUser(PerformUser performUser) {
 		String pw = performUser.getPassword();
-		performUser.setPassword(passwordEnconder.encode(pw));
+		performUser.setPassword(passwordEncoder.encode(pw));
 		return performUserRepository.save(performUser);
 	}
 

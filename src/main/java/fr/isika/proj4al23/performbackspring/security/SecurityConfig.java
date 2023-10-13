@@ -83,8 +83,7 @@ public class SecurityConfig {
 		
 		
 		
-		corsConfiguration.addAllowedOrigin("http://localhost:4200");
-		corsConfiguration.addAllowedOrigin("https://" + this.authorizedUrl);
+		corsConfiguration.addAllowedOrigin(this.authorizedUrl);
 		corsConfiguration.addAllowedMethod("*");
 		corsConfiguration.addAllowedHeader("*");
 		corsConfiguration.setAllowCredentials(true);

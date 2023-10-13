@@ -1,6 +1,6 @@
 FROM openjdk:11-jre-slim
 
-EXPOSE 3002
+EXPOSE 5000
 
 ENV DBURI ""
 ENV DBNAME ""
