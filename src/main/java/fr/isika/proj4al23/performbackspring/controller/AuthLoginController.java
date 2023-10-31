@@ -49,9 +49,17 @@ public class AuthLoginController {
 		Instant instant = Instant.now();
 		String scope = authentication.getAuthorities().stream().map(a -> a.getAuthority())
 				.collect(Collectors.joining(" "));
+		
+		PerformUser performUser = userAccountService.loadUserByUsername(username);
+		Long userId = performUser.getId();
 
-		JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder().issuedAt(instant)
-				.expiresAt(instant.plus(10, ChronoUnit.MINUTES)).subject(username).claim("scope", scope).build();
+		JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
+				.issuedAt(instant)
+				.expiresAt(instant.plus(30, ChronoUnit.MINUTES))
+				.subject(username)
+				.claim("userId", userId)
+				.claim("scope", scope)
+				.build();
 
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters
 				.from(JwsHeader.with(MacAlgorithm.HS256).build(), jwtClaimsSet);

@@ -81,8 +81,6 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		
-		
-		
 		corsConfiguration.addAllowedOrigin(this.authorizedUrl);
 		corsConfiguration.addAllowedMethod("*");
 		corsConfiguration.addAllowedHeader("*");
@@ -95,12 +93,3 @@ public class SecurityConfig {
 		return source;
 	}
 }
-
-
-
-
-
-
-
-
-

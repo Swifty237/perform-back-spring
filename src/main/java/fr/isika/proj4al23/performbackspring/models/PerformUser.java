@@ -3,12 +3,14 @@ package fr.isika.proj4al23.performbackspring.models;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -33,6 +35,9 @@ public class PerformUser {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
-	@ManyToMany(fetch = FetchType.EAGER) // fetch = FetchType.EAGER => permet de charger directement les roles à l'inverse de LAZY qui est par défaut
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // fetch = FetchType.EAGER => permet de charger directement les roles à l'inverse de LAZY qui est par défaut
 	private Collection<PerformRole> PerformRoles = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Collection<Preference> preferences = new ArrayList<>();
 }
