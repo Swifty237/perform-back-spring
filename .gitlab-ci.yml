@@ -20,8 +20,8 @@ aws-spring:
     script:
         - apt-get update -qy
         - apt-get install -y awscli
-        - echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
-        - echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+        - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+        - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
         - aws s3 cp target/perform-back-spring-0.0.1-SNAPSHOT.jar s3://perform-spring/
     rules:
         - when: manual
