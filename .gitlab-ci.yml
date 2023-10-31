@@ -22,7 +22,7 @@ aws-spring:
         - apt-get install -y awscli
         - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
         - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        - aws elasticbeanstalk create-application-version --application-name perfmma-eb --version-label <VOTRE_VERSION> --source-bundle S3Bucket=elasticbeanstalk-eu-west-3-922861330522,S3Key=target/*.jar
+        - aws elasticbeanstalk create-application-version --region $AWS_REGION --application-name perfmma-eb --source-bundle S3Bucket=elasticbeanstalk-eu-west-3-922861330522,S3Key=target/*.jar
         - aws elasticbeanstalk update-environment --region $AWS_REGION --application-name perfmma-eb --environment-name Perfmma-eb-env
         - aws elasticbeanstalk restart-app-server --environment-name Perfmma-eb-env
     rules:
