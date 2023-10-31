@@ -1,6 +1,7 @@
 stages:
     - build
-    - deploy
+    - deploy-on-s3
+    - deploy-on-eb
 
 maven-build:
     stage: build
@@ -13,7 +14,7 @@ maven-build:
             - target/*.jar
 
 aws-s3:
-    stage: deploy
+    stage: deploy-on-s3
     image: python:latest
     services:
         - docker:dind
@@ -27,7 +28,7 @@ aws-s3:
         - when: manual
         
 aws-eb:
-    stage: deploy
+    stage: deploy-on-eb
     image: python:latest
     services:
         - docker:dind
