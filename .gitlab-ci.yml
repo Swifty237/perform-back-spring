@@ -35,7 +35,7 @@ aws-eb:
         - apt-get install -y awscli
         - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
         - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        - aws elasticbeanstalk create-application-version --region $AWS_REGION --application-name $EB_APP_NAME --version-label ${CI_COMMIT_SHA:0:7} --source-bundle S3Bucket=$S3_NAME,S3Key=target/*.jar
+        - aws elasticbeanstalk create-application-version --region $AWS_REGION --application-name $EB_APP_NAME --version-label ${CI_COMMIT_SHA:0:7} --source-bundle S3Bucket=$S3_NAME,S3Key=$EB_ENV_NAME
         - aws elasticbeanstalk update-environment --region $AWS_REGION --application-name $EB_APP_NAME --environment-name $EB_ENV_NAME --version-label ${CI_COMMIT_SHA:0:7} 
         - aws elasticbeanstalk restart-app-server --environment-name $EB_ENV_NAME
     rules:
