@@ -1,6 +1,5 @@
 stages:
     - build
-    - d-build
     - deploy
 
 maven-build:
@@ -12,28 +11,17 @@ maven-build:
     artifacts:
         paths:
             - target/*.jar
-
-docker-build:
-    stage: d-build
-    image: docker:latest
-    services:
-        - docker:dind
-    script:
-        - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-        - docker build -t $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE .
-        - docker push $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-        - docker logout
         
 aws-spring:
     stage: deploy
-    image: docker:latest
+    image: python:latest
     services:
         - docker:dind
     script:
-        - if docker -H $SPRING_CLUSTER ps --format '{{.Names}}' | grep -q $DOCKERHUB_USERNAME; then docker -H $SPRING_CLUSTER stop $DOCKERHUB_USERNAME; fi
-        - if docker -H $SPRING_CLUSTER ps -a --format '{{.Names}}' | grep -q $DOCKERHUB_USERNAME; then docker -H $SPRING_CLUSTER container rm $DOCKERHUB_USERNAME; fi
-        - docker -H $SPRING_CLUSTER rmi $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-        - docker -H $SPRING_CLUSTER pull $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
-        - docker -H $SPRING_CLUSTER run --name $DOCKERHUB_USERNAME --network dbconnection -e DBURI=$DBURI -e DBUSER=$DBUSER -e DBPASS=$DBPASS -e DBNAME=$DBNAME -e DBPORT=$DBPORT -p $PHOST:$PGUEST -d $DOCKERHUB_USERNAME/$DOCKERHUB_IMAGE
+        - apt-get update -qy
+        - apt-get install -y awscli
+        - echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+        - echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+        - aws s3 cp target/perform-back-spring-0.0.1-SNAPSHOT.jar s3://perform-spring/
     rules:
         - when: manual
