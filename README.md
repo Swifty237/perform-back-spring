@@ -30,7 +30,19 @@ I haven't tested with other versions but the ones above worked for me
 
 Clone the project and open it with your favorite text editor, I used eclipse.
 
-# Utilisation
+# Local utilisation
+
+Set the following environment variables : 
+
+* DBURI => your spring backend URI
+* DBPORT => your database port
+* DBNAME => your database name
+* DBUSER => your database username
+* DBPASS => your database password
+
+* JWTSECRET => your JWT secret for spring security
+
+* FRONTURI => your front URI for CORS permissions
 
 Run the following commands : 
 
