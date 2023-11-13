@@ -34,7 +34,7 @@ Clone the project and open it with your favorite text editor, I used eclipse.
 
 Set the following environment variables : 
 
-* DBURI => your spring backend URI
+* DBURI => your database URI
 * DBPORT => your database port
 * DBNAME => your database name
 * DBUSER => your database username
