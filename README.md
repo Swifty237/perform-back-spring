@@ -4,12 +4,12 @@ Perform-back-spring
 
 # Description
 
-Perform-back-spring is a REST API which was designed with springboot to be part of a set of separate bricks and micro services which communicate with each other as needed. This set of bricks and micro services are a part of the architecture of an application named perform MMA, it manages authentication and security of the perform MMA application.
+Perform-back-spring is a REST API which was designed with springboot to be part of a set of separate bricks and micro services which communicate with each other as needed. This set of bricks and micro services are a part of the architecture of an application named perform MMA, it manages authentication and security of the Perform MMA application.
 
-For more details on the Perform MMA application, click on the following link =>
+Click on the following link for more details on Perform MMA web application =>
 <a href="https://docs.google.com/presentation/d/e/2PACX-1vSzRUSTdUaM2xpnRheKOzhWK3UeApCFwF-Qn_Nl0KEetrUcBNHhpZ1nt6GdtnWPDutZzQquVGiIEMkr/pub?start=false&loop=false&delayms=3000">Perform MMA presentation</a> <br>
 
-To test the perform MMA application click on the following link =>
+click on the following link to test the Perform MMA web application =>
 <a href="https://perfmma.surge.sh/#/ngr-home">Perform MMA</a> <br>
 
 The other bricks and micro services constituting the Perform MMA application:
