@@ -7,7 +7,7 @@ perform-back-spring
 PreformBackSpring is a REST API which was designed with springboot to be part of a set of separate bricks and micro services which communicate with each other as needed. This set of bricks and micro services are a part of the architecture of an application named perform MMA.
 
 For more details on the Perform MMA application, download the presentation on the following link =>
-<a href="https://perfmma-presentation.s3.eu-west-3.amazonaws.com/Pr%C3%A9sentation+projet+Perform+MMA.pptx">Perform MMA presentation</a> <br>
+<a href="https://docs.google.com/presentation/d/e/2PACX-1vSzRUSTdUaM2xpnRheKOzhWK3UeApCFwF-Qn_Nl0KEetrUcBNHhpZ1nt6GdtnWPDutZzQquVGiIEMkr/pub?start=false&loop=false&delayms=3000">Perform MMA presentation</a> <br>
 
 To test the perform MMA application click on the following link =>
 <a href="https://perfmma.surge.sh/#/ngr-home">Perform MMA</a> <br>
