@@ -1,15 +1,16 @@
-# Title 
+# Project title
 
-PerformBackSpring
+perform-back-spring 
 
 # Description
 
 PreformBackSpring is a REST API which was designed with springboot to be part of a set of separate bricks and micro services which communicate with each other as needed. This set of bricks and micro services are a part of the architecture of an application named perform MMA.
 
-For more details on the Perform MMA application, download the presentation on the following link
-<a href="https://perfmma-presentation.s3.eu-west-3.amazonaws.com/Pr%C3%A9sentation+projet+Perform+MMA.pptx">Perform MMA presentation</a>
-To test the perform MMA application click on the following link 
-<a href="https://perfmma.surge.sh/#/ngr-home">Perform MMA</a>
+For more details on the Perform MMA application, download the presentation on the following link =>
+<a href="https://perfmma-presentation.s3.eu-west-3.amazonaws.com/Pr%C3%A9sentation+projet+Perform+MMA.pptx">Perform MMA presentation</a> <br>
+
+To test the perform MMA application click on the following link =>
+<a href="https://perfmma.surge.sh/#/ngr-home">Perform MMA</a> <br>
 
 The other bricks and micro services constituting the Perform MMA application:
 
@@ -23,7 +24,7 @@ You need to install :
  
 * <a href="https://www.oracle.com/fr/java/technologies/javase/jdk11-archive-downloads.html">Java 11</a>
 * <a href="https://maven.apache.org/docs/3.8.7/release-notes.html">Apache Maven 3.8.7</a>
-* Mysql 8
+* <a href="https://dev.mysql.com/downloads/mysql/">Mysql 8</a>
 	
 I haven't tested with other versions but the ones above worked for me
 
