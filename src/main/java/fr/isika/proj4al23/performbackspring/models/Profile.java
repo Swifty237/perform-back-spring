@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Preference {
+public class Profile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String description;
     private String fights;
     private String wins;
     private String kowins;
@@ -28,6 +28,6 @@ public class Preference {
     private String takedowns;
     private String takedowndefense;
     private String takedownsratio;
-    private String ipsg;
+    private String level;
     private Boolean isActive;
 }

@@ -7,15 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import fr.isika.proj4al23.performbackspring.models.PerformUser;
-import fr.isika.proj4al23.performbackspring.models.Preference;
+import fr.isika.proj4al23.performbackspring.models.Profile;
 
 public interface PerformUserRepository extends JpaRepository<PerformUser, Long> {
 
 	PerformUser findByUsername(String username);
 	Boolean existsByUsername(String username);
 	Boolean existsByEmail(String email);
-	Boolean existsByIdAndPreferencesContains(Long userId, Preference preference);
+	Boolean existsByIdAndProfilesContains(Long userId, Profile profile);
 	
-	@Query("SELECT u.preferences FROM PerformUser u WHERE u.id = :userId")
-	List<Preference> getAllUserPreferences(@Param("userId") Long userId);
+	@Query("SELECT u.profiles FROM PerformUser u WHERE u.id = :userId")
+	List<Profile> getAllUserProfiles(@Param("userId") Long userId);
 }

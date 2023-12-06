@@ -20,18 +20,18 @@ public class UsersAndRolesInit implements ApplicationRunner{
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 			
-//		PerformRole roleUser = new PerformRole();
-//		roleUser.setRoleName("USER");
-//		userAccountService.addNewRole(roleUser);
-//		
-//		PerformRole roleAdmin = new PerformRole();
-//		roleAdmin.setRoleName("ADMIN");		
-//		userAccountService.addNewRole(roleAdmin);
-//		
-//		PerformRole roleMod = new PerformRole();
-//		roleMod.setRoleName("MOD");		
-//		userAccountService.addNewRole(roleMod);
-//		
+		PerformRole roleUser = new PerformRole();
+		roleUser.setRoleName("USER");
+		userAccountService.addNewRole(roleUser);
+		
+		PerformRole roleAdmin = new PerformRole();
+		roleAdmin.setRoleName("ADMIN");		
+		userAccountService.addNewRole(roleAdmin);
+		
+		PerformRole roleMod = new PerformRole();
+		roleMod.setRoleName("MOD");		
+		userAccountService.addNewRole(roleMod);
+		
 //		PerformUser user1 = new PerformUser();
 //		user1.setEmail("jean_dupont@example.com");
 //		user1.setUsername("Jean");
@@ -49,21 +49,21 @@ public class UsersAndRolesInit implements ApplicationRunner{
 //		mod.setUsername("Terence");
 //		mod.setPassword("terence");
 //		userAccountService.addNewUser(mod);
-//		
+		
 //		PerformUser admin = new PerformUser();
 //		admin.setEmail("admin@example.com");
-//		admin.setUsername("Yannick");
+//		admin.setUsername("yannick");
 //		admin.setPassword("admin");
 //		userAccountService.addNewUser(admin);
-//					
+					
 //		userAccountService.addRoleToUser("Jean", "USER");			
 //		userAccountService.addRoleToUser("Fabrice", "USER");
 //		
 //		userAccountService.addRoleToUser("Terence", "USER");
 //		userAccountService.addRoleToUser("Terence", "MOD");
-//		
-//		userAccountService.addRoleToUser("Yannick", "USER");
-//		userAccountService.addRoleToUser("Yannick", "MOD");
+		
+//		userAccountService.addRoleToUser("yannick", "USER");
+//		userAccountService.addRoleToUser("yannick", "MOD");
 //		userAccountService.addRoleToUser("yannick", "ADMIN");
 	}
 }

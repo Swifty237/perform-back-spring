@@ -39,5 +39,5 @@ public class PerformUser {
 	private Collection<PerformRole> PerformRoles = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	private Collection<Preference> preferences = new ArrayList<>();
+	private Collection<Profile> profiles = new ArrayList<>();
 }
