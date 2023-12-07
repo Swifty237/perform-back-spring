@@ -37,8 +37,8 @@ public class SecurityConfig {
 	@Value("${jwt.secret}")
 	private String secretKey;
 	
-	@Value("${prod.front.url}")
-	private String authorizedUrl;
+//	@Value("${prod.front.url}")
+//	private String authorizedUrl;
 			
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -81,7 +81,7 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		
-		corsConfiguration.addAllowedOrigin(this.authorizedUrl);
+		corsConfiguration.addAllowedOrigin("*");
 		corsConfiguration.addAllowedMethod("*");
 		corsConfiguration.addAllowedHeader("*");
 		corsConfiguration.setAllowCredentials(true);
