@@ -20,17 +20,17 @@ public class UsersAndRolesInit implements ApplicationRunner{
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 			
-		PerformRole roleUser = new PerformRole();
-		roleUser.setRoleName("USER");
-		userAccountService.addNewRole(roleUser);
-		
-		PerformRole roleAdmin = new PerformRole();
-		roleAdmin.setRoleName("ADMIN");		
-		userAccountService.addNewRole(roleAdmin);
-		
-		PerformRole roleMod = new PerformRole();
-		roleMod.setRoleName("MOD");		
-		userAccountService.addNewRole(roleMod);
+//		PerformRole roleUser = new PerformRole();
+//		roleUser.setRoleName("USER");
+//		userAccountService.addNewRole(roleUser);
+//		
+//		PerformRole roleAdmin = new PerformRole();
+//		roleAdmin.setRoleName("ADMIN");		
+//		userAccountService.addNewRole(roleAdmin);
+//		
+//		PerformRole roleMod = new PerformRole();
+//		roleMod.setRoleName("MOD");		
+//		userAccountService.addNewRole(roleMod);
 		
 //		PerformUser user1 = new PerformUser();
 //		user1.setEmail("jean_dupont@example.com");
